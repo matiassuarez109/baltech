@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baltech | Tecnología e Informática</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- VARIABLES Y RESET --- */
+        :root {
+            /* Verde característico tipo Baltech (Ajustado para que brille en oscuro) */
+            --primary-green: #39b54a; 
+            --primary-green-hover: #2e963d;
+            --dark-bg: #121212;
+            --card-bg: #1e1e1e;
+            --text-white: #ffffff;
+            --text-gray: #b0b0b0;
+            --shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-white);
+            line-height: 1.6;
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+        img { max-width: 100%; display: block; }
+
+        /* --- HEADER --- */
+        header {
+            background-color: rgba(18, 18, 18, 0.95);
+            padding: 1.5rem 5%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid var(--primary-green);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: var(--text-white);
+        }
+
+        .logo span {
+            color: var(--primary-green);
+        }
+
+        nav ul {
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a:hover {
+            color: var(--primary-green);
+        }
+
+        .cart-icon {
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        /* --- HERO BANNER --- */
+        .hero {
+            height: 80vh;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        url('https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            font-weight: 800;
+        }
+
+        .hero h1 span {
+            color: var(--primary-green);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            background-color: var(--primary-green);
+            color: white;
+            font-weight: 700;
+            border-radius: 5px;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-green-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 0 15px rgba(57, 181, 74, 0.4);
+        }
+
+        /* --- FEATURES --- */
+        .features {
+            display: flex;
+            justify-content: space-around;
+            padding: 2rem 5%;
+            background-color: #1a1a1a;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .feature-item {
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .feature-item i {
+            color: var(--primary-green);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* --- PRODUCT GRID --- */
+        .products-section {
+            padding: 4rem 5%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary-green);
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            border: 1px solid #333;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow);
+            border-color: var(--primary-green);
+        }
+
+        .badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--primary-green);
+            color: white;
+            padding: 5px 10px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            border-radius: 3px;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background-color: #fff; /* Fondo blanco para las fotos de producto */
+            padding: 10px;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-category {
+            color: var(--text-gray);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-title {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .product-price {
+            font-size: 1.3rem;
+            color: var(--primary-green);
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .btn-card {
+            width: 100%;
+            padding: 10px;
+            background-color: transparent;
+            border: 2px solid var(--primary-green);
+            color: var(--primary-green);
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-card:hover {
+            background-color: var(--primary-green);
+            color: white;
+        }
+
+        /* --- BANNER SECUNDARIO --- */
+        .promo-banner {
+            background: linear-gradient(90deg, #000 0%, #1e1e1e 100%);
+            padding: 4rem 5%;
+            margin: 4rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            border-left: 5px solid var(--primary-green);
+        }
+
+        .promo-text {
+            max-width: 600px;
+        }
+
+        .promo-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .promo-text h2 span { color: var(--primary-green); }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: #0a0a0a;
+            padding: 3rem 5%;
+            color: var(--text-gray);
+            border-top: 1px solid #333;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-col h3 {
+            color: white;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--primary-green);
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid #333;
+            font-size: 0.9rem;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            nav { display: none; } /* Ocultamos menú en móvil por simplicidad */
+            .hero h1 { font-size: 2rem; }
+            .promo-banner { text-align: center; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">BAL<span>TECH</span></div>
+        <nav>
+            <ul>
+                <li><a href="#">Inicio</a></li>
+                <li><a href="#">Productos</a></li>
+                <li><a href="#">Armá tu PC</a></li>
+                <li><a href="#">Contacto</a></li>
+            </ul>
+        </nav>
+        <div class="cart-icon">🛒 Carrito (0)</div>
+    </header>
+
+    <section class="hero">
+        <h1>Tecnología que <br><span>Potencia tu Mundo</span></h1>
+        <p>Encontrá lo último en hardware, gaming y accesorios. Calidad garantizada y envíos a todo el país.</p>
+        <button class="btn">Ver Catálogo</button>
+    </section>
+
+    <section class="features">
+        <div class="feature-item">📦 Envíos a todo el país</div>
+        <div class="feature-item">💳 12 Cuotas sin interés</div>
+        <div class="feature-item">🛡️ Garantía Oficial</div>
+    </section>
+
+    <section class="products-section">
+        <h2 class="section-title">Destacados del Mes</h2>
+        
+        <div class="product-grid">
+            <div class="product-card">
+                <span class="badge">OFERTA</span>
+                <img src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="PC Gamer" class="product-image">
+                <div class="product-info">
+                    <p class="product-category">Computación</p>
+                    <h3 class="product-title">PC Gamer Extreme i7 + RTX 4070</h3>
+                    <div class="product-price">$ 1.250.000</div>
+                    <button class="btn-card">Agregar al Carrito</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Auriculares" class="product-image">
+                <div class="product-info">
+                    <p class="product-category">Audio</p>
+                    <h3 class="product-title">Auriculares Sony Wireless Noise Cancelling</h3>
+                    <div class="product-price">$ 180.000</div>
+                    <button class="btn-card">Agregar al Carrito</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <span class="badge">NUEVO</span>
+                <img src="https://images.unsplash.com/photo-1587831990711-23ca6441447b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Monitor" class="product-image">
+                <div class="product-info">
+                    <p class="product-category">Monitores</p>
+                    <h3 class="product-title">Monitor Curvo 27" 144Hz 1ms</h3>
+                    <div class="product-price">$ 320.000</div>
+                    <button class="btn-card">Agregar al Carrito</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Teclado" class="product-image">
+                <div class="product-info">
+                    <p class="product-category">Periféricos</p>
+                    <h3 class="product-title">Teclado Mecánico RGB Red Switch</h3>
+                    <div class="product-price">$ 85.000</div>
+                    <button class="btn-card">Agregar al Carrito</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="promo-banner">
+        <div class="promo-text">
+            <h2>Actualizá tu <span>Setup</span></h2>
+            <p>Llevando el combo teclado + mouse + pad tenés un 20% de descuento extra pagando con transferencia.</p>
+        </div>
+        <button class="btn">Ver Combos</button>
+    </section>
+
+    <section class="products-section">
+        <h2 class="section-title">Componentes</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1591488320449-011701bb6704?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Placa de Video" class="product-image">
+                <div class="product-info">
+                    <p class="product-category">Hardware</p>
+                    <h3 class="product-title">Placa de Video GeForce RTX 4060</h3>
+                    <div class="product-price">$ 450.000</div>
+                    <button class="btn-card">Agregar al Carrito</button>
+                </div>
+            </div>
+             <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1597872252169-e84481418e95?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Memoria RAM" class="product-image">
+                <div class="product-info">
+                    <p class="product-category">Hardware</p>
+                    <h3 class="product-title">Memoria RAM 16GB DDR4 Fury</h3>
+                    <div class="product-price">$ 45.000</div>
+                    <button class="btn-card">Agregar al Carrito</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <h3>BALTECH</h3>
+                <p>Tu tienda de confianza en tecnología. Asesoramiento personalizado y los mejores precios del mercado.</p>
+            </div>
+            <div class="footer-col">
+                <h3>Categorías</h3>
+                <ul>
+                    <li><a href="#">Notebooks</a></li>
+                    <li><a href="#">PC Armadas</a></li>
+                    <li><a href="#">Placas de Video</a></li>
+                    <li><a href="#">Periféricos</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Contacto</h3>
+                <ul>
+                    <li>WhatsApp: +54 9 11 1234 5678</li>
+                    <li>Email: ventas@baltech.com.ar</li>
+                    <li>Av. Tecnología 1234, CABA</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2023 Baltech Argentina - Todos los derechos reservados.
+        </div>
+    </footer>
+
+</body>
+</html>
